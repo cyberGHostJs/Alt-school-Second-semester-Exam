@@ -1,57 +1,30 @@
 import React from "react";
-import { useState, useCallback } from "react";
-
-
-
-const initialState = {count: 0};
-
-function reducer (state, action) {
-  switch (action.type){
-    case "increment":
-      return {count: state.count + 1};
-      case "decrement":
-        return {count: state.count -1};
-        case "reset":
-          return {count: 0};
-  }
-}
-
-function useReducer(reducer , initState){
-  const [value , setValue] = useState(initState);
-
-  const dispatch = useCallback((action) =>{
-    const nextState =reducer(value, action)
-    setValue(nextState)
-  }, [setValue, value])
-  return [value, dispatch]; 
-}
+import { ErrorBoundary } from "react-error-boundary";
+import { Fallback } from "./components/Fallback";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import Error from "./components/Error.js";
+import Page404 from './components/Page404'
+import Navigation from "./components/Navigation";
 
 function App() {
-  
-const [state, dispatch] = useReducer(reducer, initialState);
+  const errorHandler = (error, errorInfo) => {
+    console.log("logging", error, errorInfo);
+  };
 
   return (
-
-    <React.Fragment>
-
-      <section className="main_container">
-      <div className="counter_label">{state.count}</div>
-      <button
-        className="Action-btn"
-        onClick={() => dispatch({type: "increment"})
-        }
-      >
-        increment
-      </button>
-      <button className="Action-btn" onClick={() => dispatch({type: "decrement"})}>
-        decreament
-      </button>
-      <button className="Action-btn" onClick={() => dispatch({type: "reset"})}>
-        reset
-      </button>
+    <section>
+      <BrowserRouter>
+        <ErrorBoundary FallbackComponent={Fallback} onError={errorHandler}>
+        <Navigation/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Error" element={<Error />} />
+            <Route path="/*" element={<Page404 />} />
+          </Routes>
+        </ErrorBoundary>
+      </BrowserRouter>
     </section>
-    </React.Fragment>
-    
   );
 }
 
