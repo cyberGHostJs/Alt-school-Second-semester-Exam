@@ -4,6 +4,7 @@
    align-items: center;
    justify-content: center;
    margin-top: 50px;
+   word-wrap: break-word;
 }
 .Action-btn {
     background-color: #4caf50;
@@ -45,4 +46,7 @@
 .nav_li:hover{
     background-color: green;
     transition: 0.5s;
+}
+.reducer{
+    margin: 0 auto;
 }
