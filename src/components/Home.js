@@ -29,6 +29,7 @@ export default function Home() {
             impliment a page for the custom hook, useReducer, 404 Page, and page
             to test error boundary and Good SEO
           </li>
+          <li>I added a future that shows "last count before reset" in the test error boundary page</li>
         </ul>
         <h1 className="reducer">This is a useReducer Counter</h1>
         <div className="counter_label"> Count: {state.count}</div>
