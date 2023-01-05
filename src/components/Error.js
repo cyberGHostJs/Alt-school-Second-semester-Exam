@@ -6,6 +6,8 @@ const MAX_COUNT_ALLOWED = 5;
 export default function ErrorBoundary() {
   //useState for count...
   const [state, setState] = useState(0);
+  const [history, setHistory] = useState('');
+
   //initializing errorHandler
   const HandleError = useErrorHandler();
 
@@ -27,8 +29,14 @@ export default function ErrorBoundary() {
   };
   const Decreament = () => {
     setState(state - 1);
+
   };
   const Reset = (prev) => {
+    if (prev === 0) {
+      setHistory(0)
+    }else{
+      setHistory(state)
+    }
     setState((prev = 0));
   };
 
@@ -60,6 +68,7 @@ export default function ErrorBoundary() {
         <button className="Action-btn" onClick={Reset}>
           reset
         </button>
+        <p>Your last count beofore you reset was: {history}</p>          
       </div>
     </section>
   );
