@@ -4,7 +4,7 @@ import { Fallback } from "./components/Fallback";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import Error from "./components/Error.js";
-import Page404 from './components/Page404'
+import Page404 from "./components/Page404";
 import Navigation from "./components/Navigation";
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
     <section>
       <BrowserRouter>
         <ErrorBoundary FallbackComponent={Fallback} onError={errorHandler}>
-        <Navigation/>
+          <Navigation />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/Error" element={<Error />} />
